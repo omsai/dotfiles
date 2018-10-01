@@ -24,9 +24,13 @@ We will demonstrate with an example of importing `my_new_file.el`
 
 ```sh
 echo '(message "test")' >> ~/.emacs.d/my_new_file.el
-file ~/.emacs.d/my_new_file.el
+file ../.emacs.d/my_new_file.el
+# ../.emacs.d/my_new_file.el: ASCII text
 touch emacs/.emacs.d/my_new_file.el
 stow --adopt emacs
-file ~/.emacs.d/my_new_file.el
+file ../.emacs.d/my_new_file.el
+# ../.emacs.d/my_new_file.el: symbolic link to ../.dotfiles/emacs/.emacs.d/my_new_file.el
+cat emacs/.emacs.d/my_new_file.el
+# (message "test")
 rm {emacs,~}/.emacs.d/my_new_file.el
 ```
