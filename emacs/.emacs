@@ -9,6 +9,7 @@
 (setq backup-directory-alist `(("." . "~/.saves")))
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
+(setq save-abbrevs nil)
 ;; TODO: Enable auto-revert-mode with doc-view-mode
 
 ;; Package specific configuration.
