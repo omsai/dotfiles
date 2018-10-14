@@ -16,6 +16,8 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
+; Force refresh contents if new package installations fail.
+;(package-refresh-contents)
 (require 'use-package)	 ; See https://github.com/jwiegley/use-package
 (setq use-package-always-ensure t)
 (use-package auto-package-update
