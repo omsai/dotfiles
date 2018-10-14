@@ -53,4 +53,7 @@
   (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode)))
 ;; Continuous Integration.
 (use-package yaml-mode)
+;; Git interface.
+(use-package magit
+  :bind ("C-x g" . magit-status))
 ;;; .emacs ends here
