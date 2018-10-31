@@ -27,7 +27,9 @@
   (auto-package-update-maybe))
 (use-package flycheck
   :config
-  (global-flycheck-mode))
+  (global-flycheck-mode)
+  :init
+  (setq-default flycheck-disabled-checkers '(c/c++-clang)))
 ;; Python.
 (use-package elpy
   :config
