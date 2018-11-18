@@ -16,6 +16,7 @@ All work is done after entering your cloned git directory, `~/.dotfiles`.
 To install files e.g. for emacs, run:
 
 ```sh
+mkdir -p ~/.emacs.d
 stow emacs
 ```
 
