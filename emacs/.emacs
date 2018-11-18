@@ -18,6 +18,10 @@
 (package-initialize)
 ; Force refresh contents if new package installations fail.
 ;(package-refresh-contents)
+(if (not (package-installed-p 'use-package))
+    (progn
+      (package-refresh-contents)
+      (package-install 'use-package)))
 (require 'use-package)	 ; See https://github.com/jwiegley/use-package
 (setq use-package-always-ensure t)
 (use-package auto-package-update
