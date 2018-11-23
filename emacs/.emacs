@@ -11,7 +11,6 @@
 (load custom-file)
 (setq save-abbrevs nil)
 (savehist-mode 1)
-;; TODO: Enable auto-revert-mode with doc-view-mode
 
 ;; Package specific configuration.
 (require 'package)
