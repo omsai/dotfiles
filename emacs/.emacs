@@ -65,4 +65,9 @@
 ;; Git interface.
 (use-package magit
   :bind ("C-x g" . magit-status))
+;; LaTeX PDF.
+(use-package tex
+  :ensure auctex
+  :config
+  (setq TeX-PDF-mode t))
 ;;; .emacs ends here
