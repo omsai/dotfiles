@@ -39,7 +39,10 @@
   :config
   (elpy-enable)
   :init
-  (add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1))))
+  (add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
+  (when (executable-find "ipython")
+    (setq python-shell-interpreter "ipython")
+    (setq python-shell-interpreter-args "-i --simple-prompt")))
 ;; R.
 (use-package ess
   :init
