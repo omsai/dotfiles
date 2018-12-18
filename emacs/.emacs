@@ -11,6 +11,12 @@
 (load custom-file)
 (setq save-abbrevs nil)
 (savehist-mode 1)
+(defun un-mitm-url (url)
+  "Deobfuscate URL from UConn's outlook protection.
+
+See https://stackoverflow.com/a/797552"
+  (interactive "Murl: ")
+  (apply 'last (apply 'last (last (url-parse-query-string (url-unhex-string url))))))
 
 ;; Package specific configuration.
 (require 'package)
