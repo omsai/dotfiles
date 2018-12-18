@@ -6,8 +6,11 @@
 ;;; Code:
 
 ;; Package independent configuration.
+(tool-bar-mode -1)
 (setq backup-directory-alist `(("." . "~/.saves")))
 (setq custom-file "~/.emacs.d/custom.el")
+(unless (file-exists-p custom-file)
+  (write-region "" nil custom-file))
 (load custom-file)
 (setq save-abbrevs nil)
 (savehist-mode 1)
