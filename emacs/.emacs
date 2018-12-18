@@ -76,12 +76,33 @@
 (use-package yaml-mode)
 ;; Git interface.
 (use-package magit
-  :bind ("C-x g" . magit-status)
-  :init
-  (magit-pull-branch (magit-get-remote) (magit-get "pull.default")))
+  :bind ("C-x g" . magit-status))
 ;; LaTeX PDF.
 (use-package tex
   :ensure auctex
   :config
   (setq TeX-PDF-mode t))
+;; Restart emacs if any dotfiles were updated.  FIXME: One should only
+;; need to restart if .emacs related files were updated.
+(use-package restart-emacs)
+(defun first-directory-in-path (path)
+  "Return first directory in PATH with trailing slash.
+
+Emacs doesn't provide a directory separator character, so this
+function recursively runs 'file-name-directory' until nil, and
+returns the directory before it became nil."
+  (let ((path-new (file-name-directory path)))
+    (if path-new
+	(first-directory-in-path (directory-file-name path-new))
+      (file-name-as-directory path))))
+(let ((path-dotfiles (first-directory-in-path
+		      ;; Get directory of symlink target.
+		      (file-symlink-p "~/.emacs"))))
+  (let ((pull-output
+	 ;; Update .dotfiles git repo.
+	 (shell-command-to-string (concat "git -C " path-dotfiles " pull"))))
+    ;; Restart emacs if needed.
+    (if (not (equal pull-output "Already up to date.
+"))
+	(restart-emacs))))
 ;;; .emacs ends here
