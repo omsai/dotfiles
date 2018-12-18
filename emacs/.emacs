@@ -73,7 +73,9 @@
 (use-package yaml-mode)
 ;; Git interface.
 (use-package magit
-  :bind ("C-x g" . magit-status))
+  :bind ("C-x g" . magit-status)
+  :init
+  (magit-pull-branch (magit-get-remote) (magit-get "pull.default")))
 ;; LaTeX PDF.
 (use-package tex
   :ensure auctex
