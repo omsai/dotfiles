@@ -49,8 +49,8 @@
   (setq
    ;; Don't use python2, even if it's available.
    elpy-rpc-python-command "python3"
-   python-shell-interpreter (substitute-in-file-name "$HOME/.local/bin/jupyter")
    ;; Use jupyter interpreter.
+   python-shell-interpreter (expand-file-name "~/.local/bin/jupyter")
    python-shell-interpreter-args "console --simple-prompt"
    python-shell-prompt-detect-failure-warning nil))
 ;; R.
