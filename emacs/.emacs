@@ -82,6 +82,7 @@
   :ensure auctex
   :config
   (setq TeX-PDF-mode t))
+
 ;; Restart emacs if any dotfiles were updated.  FIXME: One should only
 ;; need to restart if .emacs related files were updated.
 (use-package restart-emacs)
