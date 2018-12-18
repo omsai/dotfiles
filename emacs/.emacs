@@ -42,12 +42,15 @@
   (add-hook
    'elpy-mode-hook
    (lambda ()
+     ;; Don't show indentation guides.
      (highlight-indentation-mode -1)
      (add-to-list
       'python-shell-completion-native-disabled-interpreters "jupyter")))
   (setq
+   ;; Don't use python2, even if it's available.
    elpy-rpc-python-command "python3"
    python-shell-interpreter (substitute-in-file-name "$HOME/.local/bin/jupyter")
+   ;; Use jupyter interpreter.
    python-shell-interpreter-args "console --simple-prompt"
    python-shell-prompt-detect-failure-warning nil))
 ;; R.
