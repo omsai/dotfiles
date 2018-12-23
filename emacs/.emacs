@@ -124,7 +124,7 @@ returns the directory before it became nil."
 	 ;; Update .dotfiles git repo.
 	 (shell-command-to-string (concat "git -C " path-dotfiles " pull"))))
     ;; Restart emacs if needed.
-    (if (not (equal pull-output "Already up to date.
-"))
+    (if (not (string-match "Already up[ -]to[ -]date.
+" pull-output))
 	(restart-emacs))))
 ;;; .emacs ends here
