@@ -117,18 +117,32 @@ returns the directory before it became nil."
     (if path-new
 	(first-directory-in-path (directory-file-name path-new))
       (file-name-as-directory path))))
+(defun extract-sha1 (string)
+  "Return SHA-1 from beginning of STRING or nil if not found."
+  (if (= 40 (string-match "\\W" string)) ;; SHA-1 is 40 characters.
+      (substring string 0 40)))
 (let ((path-dotfiles
        ;; Get absolute path.
        (concat "~/"
 	(first-directory-in-path
 	 ;; Get directory of symlink target.
 	 (file-symlink-p "~/.emacs")))))
-  (let ((pull-output
-	 ;; Update .dotfiles git repo.
-	 (shell-command-to-string (concat "git -C " path-dotfiles " fetch --dry-run"))))
-    ;; Restart emacs if needed.
-    (if (not (string-match "
-" pull-output))
-	(shell-command (concat "git -C " path-dotfiles " pull"))
-	(restart-emacs))))
+  (let ((head-remote
+	 (extract-sha1
+	  (shell-command-to-string
+	   (concat "git -C " path-dotfiles
+		   " ls-remote origin --heads refs/heads/master"))))
+	(head-local
+	 (extract-sha1
+	   (shell-command-to-string
+	    (concat "git -C " path-dotfiles
+		    " show-ref --heads")))))
+    (unless
+	(not (and
+	      ;; We have network connectivity to get the remote SHA-1.
+	      head-remote
+	      ;; HEADs are different.
+	      (not (equal head-local head-remote))))
+      (shell-command (concat "git -C " path-dotfiles " pull"))
+      (restart-emacs))))
 ;;; .emacs ends here
