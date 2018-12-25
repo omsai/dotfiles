@@ -117,9 +117,12 @@ returns the directory before it became nil."
     (if path-new
 	(first-directory-in-path (directory-file-name path-new))
       (file-name-as-directory path))))
-(let ((path-dotfiles (first-directory-in-path
-		      ;; Get directory of symlink target.
-		      (file-symlink-p "~/.emacs"))))
+(let ((path-dotfiles
+       ;; Get absolute path.
+       (concat "~/"
+	(first-directory-in-path
+	 ;; Get directory of symlink target.
+	 (file-symlink-p "~/.emacs")))))
   (let ((pull-output
 	 ;; Update .dotfiles git repo.
 	 (shell-command-to-string (concat "git -C " path-dotfiles " fetch --dry-run"))))
