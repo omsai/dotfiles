@@ -122,9 +122,10 @@ returns the directory before it became nil."
 		      (file-symlink-p "~/.emacs"))))
   (let ((pull-output
 	 ;; Update .dotfiles git repo.
-	 (shell-command-to-string (concat "git -C " path-dotfiles " pull"))))
+	 (shell-command-to-string (concat "git -C " path-dotfiles " fetch --dry-run"))))
     ;; Restart emacs if needed.
-    (if (not (string-match "Already up[ -]to[ -]date.
+    (if (not (string-match "
 " pull-output))
+	(shell-command (concat "git -C " path-dotfiles " pull"))
 	(restart-emacs))))
 ;;; .emacs ends here
