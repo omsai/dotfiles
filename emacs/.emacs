@@ -117,32 +117,34 @@ returns the directory before it became nil."
     (if path-new
 	(first-directory-in-path (directory-file-name path-new))
       (file-name-as-directory path))))
-(defun extract-sha1 (string)
-  "Return SHA-1 from beginning of STRING or nil if not found."
-  (if (= 40 (string-match "\\W" string)) ;; SHA-1 is 40 characters.
-      (substring string 0 40)))
-(let ((path-dotfiles
-       ;; Get absolute path.
-       (concat "~/"
+(let ((git				; "git -C ~/.dotfiles "
+       (concat
+	"git -C "
+	;; Get absolute path.
+	"~/"
 	(first-directory-in-path
 	 ;; Get directory of symlink target.
-	 (file-symlink-p "~/.emacs")))))
-  (let ((head-remote
-	 (extract-sha1
-	  (shell-command-to-string
-	   (concat "git -C " path-dotfiles
-		   " ls-remote origin --heads refs/heads/master"))))
-	(head-local
-	 (extract-sha1
+	 (file-symlink-p "~/.emacs"))
+	" ")))
+  ;; git fetch to check if the origin is ahead of our local repo.
+  (unless (not (equal 0 (shell-command (concat git "fetch"))))
+    ;; Now git status is aware of remote commits.
+    (let ((git-status-full
 	   (shell-command-to-string
-	    (concat "git -C " path-dotfiles
-		    " show-ref --heads")))))
-    (unless
-	(not (and
-	      ;; We have network connectivity to get the remote SHA-1.
-	      head-remote
-	      ;; HEADs are different.
-	      (not (equal head-local head-remote))))
-      (shell-command (concat "git -C " path-dotfiles " pull"))
-      (restart-emacs))))
+	    (concat git "status --short --branch"))))
+      (let ((git-status-firstline
+	     (substring git-status-full 0
+			(string-match "\n" git-status-full))))
+	(let ((pos-first-bracket
+	       (string-match "\\[" git-status-firstline)))
+	  ;; Can look like "## master...origin/master [behind 1]"
+	  (unless (not pos-first-bracket)
+	    (let ((state (substring
+			  git-status-firstline
+			  (+ 1 pos-first-bracket)
+			  (string-match " " git-status-firstline
+					pos-first-bracket))))
+	      (unless (string= "behind" state)
+		(shell-command (concat git "pull"))
+		(restart-emacs)))))))))
 ;;; .emacs ends here
