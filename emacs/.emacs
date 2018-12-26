@@ -6,7 +6,8 @@
 ;;; Code:
 
 ;; Package independent configuration.
-(tool-bar-mode -1)
+(if (fboundp 'tool-bar-mode)
+    (tool-bar-mode -1))
 (setq backup-directory-alist `(("." . "~/.saves")))
 (setq custom-file "~/.emacs.d/custom.el")
 (unless (file-exists-p custom-file)
