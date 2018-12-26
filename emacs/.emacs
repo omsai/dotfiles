@@ -144,7 +144,7 @@ returns the directory before it became nil."
 			  (+ 1 pos-first-bracket)
 			  (string-match " " git-status-firstline
 					pos-first-bracket))))
-	      (unless (string= "behind" state)
-		(shell-command (concat git "pull"))
-		(restart-emacs)))))))))
+	      (unless (not (string= "behind" state))
+		(unless (not (equal 0 (shell-command (concat git "pull"))))
+		  (restart-emacs))))))))))
 ;;; .emacs ends here
