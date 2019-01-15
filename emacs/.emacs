@@ -21,6 +21,9 @@
 See https://stackoverflow.com/a/797552"
   (interactive "Murl: ")
   (apply 'last (apply 'last (last (url-parse-query-string (url-unhex-string url))))))
+(defun has-no-internet ()
+  "Return true if no internet."
+  (not (equal 0 (call-process "ping" nil nil nil "-c" "1" "-W" "1" "eff.org"))))
 
 ;; Package specific configuration.
 (require 'package)
@@ -33,12 +36,13 @@ See https://stackoverflow.com/a/797552"
       (package-refresh-contents)
       (package-install 'use-package)))
 (require 'use-package)	 ; See https://github.com/jwiegley/use-package
-(setq use-package-always-ensure t)
-(use-package auto-package-update
-  :config
-  (setq auto-package-update-delete-old-versions t)
-  (setq auto-package-update-hide-results t)
-  (auto-package-update-maybe))
+(unless (has-no-internet)
+  (setq use-package-always-ensure t)
+  (use-package auto-package-update
+    :config
+    (setq auto-package-update-delete-old-versions t)
+    (setq auto-package-update-hide-results t)
+    (auto-package-update-maybe)))
 (use-package flycheck
   :config
   (global-flycheck-mode)
@@ -96,13 +100,14 @@ See https://stackoverflow.com/a/797552"
 ;; GitHub packages.
 (defun use-package-github (package)
   "Install Emacs PACKAGE string 'user/package' from GitHub."
-  (let ((url (concat "https://github.com/" package))
-	(dir (file-name-nondirectory package)))
-    (let ((install-dir (concat "~/.emacs.d/" dir)))
-      (if (file-directory-p install-dir)
-	  (shell-command (concat "git -C " install-dir " pull"))
+  (unless (has-no-internet)
+    (let ((url (concat "https://github.com/" package))
+	  (dir (file-name-nondirectory package)))
+      (let ((install-dir (concat "~/.emacs.d/" dir)))
+	(if (file-directory-p install-dir)
+	    (shell-command (concat "git -C " install-dir " pull"))
 	(shell-command (concat "git clone " url " " install-dir)))
-      (load (concat (file-name-as-directory install-dir) dir ".el")))))
+	(load (concat (file-name-as-directory install-dir) dir ".el"))))))
 (use-package-github "wentasah/meson-mode")
 
 ;; Restart emacs if any dotfiles were updated.  FIXME: One should only
@@ -127,25 +132,26 @@ returns the directory before it became nil."
 	 ;; Get directory of symlink target.
 	 (file-symlink-p "~/.emacs"))
 	" ")))
-  ;; git fetch to check if the origin is ahead of our local repo.
-  (unless (not (equal 0 (shell-command (concat git "fetch"))))
-    ;; Now git status is aware of remote commits.
-    (let ((git-status-full
-	   (shell-command-to-string
-	    (concat git "status --short --branch"))))
-      (let ((git-status-firstline
-	     (substring git-status-full 0
-			(string-match "\n" git-status-full))))
-	(let ((pos-first-bracket
-	       (string-match "\\[" git-status-firstline)))
-	  ;; Can look like "## master...origin/master [behind 1]"
-	  (unless (not pos-first-bracket)
-	    (let ((state (substring
-			  git-status-firstline
-			  (+ 1 pos-first-bracket)
-			  (string-match " " git-status-firstline
-					pos-first-bracket))))
-	      (unless (not (string= "behind" state))
-		(unless (not (equal 0 (shell-command (concat git "pull"))))
-		  (restart-emacs))))))))))
+  (unless (has-no-internet)
+    ;; git fetch to check if the origin is ahead of our local repo.
+    (unless (not (equal 0 (shell-command (concat git "fetch"))))
+      ;; Now git status is aware of remote commits.
+      (let ((git-status-full
+	     (shell-command-to-string
+	      (concat git "status --short --branch"))))
+	(let ((git-status-firstline
+	       (substring git-status-full 0
+			  (string-match "\n" git-status-full))))
+	  (let ((pos-first-bracket
+		 (string-match "\\[" git-status-firstline)))
+	    ;; Can look like "## master...origin/master [behind 1]"
+	    (unless (not pos-first-bracket)
+	      (let ((state (substring
+			    git-status-firstline
+			    (+ 1 pos-first-bracket)
+			    (string-match " " git-status-firstline
+					  pos-first-bracket))))
+		(unless (not (string= "behind" state))
+		  (unless (not (equal 0 (shell-command (concat git "pull"))))
+		    (restart-emacs)))))))))))
 ;;; .emacs ends here
