@@ -68,16 +68,7 @@ See https://stackoverflow.com/a/797552"
    python-shell-interpreter-args "console --simple-prompt"
    python-shell-prompt-detect-failure-warning nil))
 ;; R.
-(use-package ess
-  :init
-  (require 'ess-site)
-  :config
-  ;; Yes, ess-toggle-underscore is deprecated in ESS 18, but it's not
-  ;; clear to me how to use the replacement ess-insert-assign
-  ;; function.
-  (ess-toggle-underscore nil))
-  ;; (ess-insert-assign ""))
-  ;; (local-unset-key "_"))
+(use-package ess)
 (use-package poly-markdown
   :config
   (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode)))
