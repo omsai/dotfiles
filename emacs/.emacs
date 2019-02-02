@@ -37,6 +37,7 @@ See https://stackoverflow.com/a/797552"
       (package-install 'use-package)))
 (require 'use-package)	 ; See https://github.com/jwiegley/use-package
 (unless (has-no-internet)
+  (setq use-package-compute-statistics t)
   (setq use-package-always-ensure t)
   (use-package auto-package-update
     :config
@@ -50,6 +51,7 @@ See https://stackoverflow.com/a/797552"
   (setq-default flycheck-disabled-checkers '(c/c++-clang)))
 ;; Python.
 (use-package elpy
+  :defer t
   :config
   (elpy-enable)
   :init
@@ -68,12 +70,15 @@ See https://stackoverflow.com/a/797552"
    python-shell-interpreter-args "console --simple-prompt"
    python-shell-prompt-detect-failure-warning nil))
 ;; R.
-(use-package ess)
+(use-package ess
+  :defer t)
 (use-package poly-markdown
+  :defer t
   :config
   (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode)))
 (use-package poly-noweb)
 (use-package poly-R
+  :defer t
   :requires (poly-noweb poly-markdown)
   :config
   (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode)))
@@ -84,6 +89,7 @@ See https://stackoverflow.com/a/797552"
   :bind ("C-x g" . magit-status))
 ;; LaTeX PDF.
 (use-package tex
+  :defer t
   :ensure auctex
   :config
   (setq TeX-PDF-mode t))
