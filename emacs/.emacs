@@ -15,6 +15,7 @@
 (load custom-file)
 (setq save-abbrevs nil)
 (savehist-mode 1)
+(setq dired-listing-switches "-alh")
 (defun un-mitm-url (url)
   "Deobfuscate URL from UConn's outlook protection.
 
