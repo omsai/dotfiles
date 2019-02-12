@@ -93,6 +93,8 @@ See https://stackoverflow.com/a/797552"
   :ensure auctex
   :config
   (setq TeX-PDF-mode t))
+;; Bash unit tests.
+(use-package bats-mode)
 
 ;; GitHub packages.
 (defun use-package-github (package)
