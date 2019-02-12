@@ -52,7 +52,6 @@ See https://stackoverflow.com/a/797552"
   (setq-default flycheck-disabled-checkers '(c/c++-clang)))
 ;; Python.
 (use-package elpy
-  :defer t
   :config
   (elpy-enable)
   :init
