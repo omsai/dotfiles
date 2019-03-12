@@ -18,6 +18,10 @@
 (savehist-mode 1)
 (setq dired-listing-switches "-alh")
 (setq org-src-fontify-natively t)
+(defun my-c-mode-common-hook ()
+  "Disable extra lambda indentation in 'c-mode' and related modes."
+  (c-set-offset 'inlambda 0))
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 (defun un-mitm-url (url)
   "Deobfuscate URL from UConn's outlook protection.
 
