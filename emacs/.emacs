@@ -6,6 +6,7 @@
 ;;; Code:
 
 ;; Package independent configuration.
+(menu-bar-mode -1)
 (if (fboundp 'tool-bar-mode)
     (tool-bar-mode -1))
 (setq backup-directory-alist `(("." . "~/.saves")))
