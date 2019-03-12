@@ -74,12 +74,10 @@ See https://stackoverflow.com/a/797552"
 (use-package ess
   :defer t)
 (use-package poly-markdown
-  :defer t
   :config
   (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode)))
 (use-package poly-noweb)
 (use-package poly-R
-  :defer t
   :requires (poly-noweb poly-markdown)
   :config
   (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode)))
