@@ -35,7 +35,6 @@ See https://stackoverflow.com/a/797552"
 ;; Package specific configuration.
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 ; Force refresh contents if new package installations fail.
 ;(package-refresh-contents)
@@ -79,17 +78,7 @@ See https://stackoverflow.com/a/797552"
 ;; R.
 (use-package ess
   :defer t)
-(use-package polymode
-  ;; Need stable version for poly-R.
-  :pin melpa-stable)
-(use-package poly-noweb
-  ;; Need stable version for poly-R.
-  :pin melpa-stable)
-(use-package poly-markdown
-  ;; Need stable version for poly-R.
-  :pin melpa-stable)
-(use-package poly-R
-  :pin melpa-stable)
+(use-package poly-R)
 ;; Continuous Integration.
 (use-package yaml-mode)
 ;; Git interface.
