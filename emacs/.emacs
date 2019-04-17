@@ -78,7 +78,8 @@ See https://stackoverflow.com/a/797552"
 ;; R.
 (use-package ess
   :defer t)
-(use-package poly-R)
+(use-package poly-R
+  :ensure poly-markdown)
 ;; Continuous Integration.
 (use-package yaml-mode)
 ;; Git interface.
