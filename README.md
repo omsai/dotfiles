@@ -9,16 +9,17 @@ the target directory as the parent of the current directory but there isn't yet
 a convenient way to overwrite the target directory using `~` or `$HOME` in
 `.stowrc`.
 
-## Usage
+## Installing files using stow
 
 All work is done after entering your cloned git directory, `~/.dotfiles`.
 
 To install files e.g. for emacs, run:
 
 ```sh
-mkdir -p ~/.emacs.d
 stow emacs
 ```
+
+## Importing a file into stow
 
 To import a file, touch the file inside your stow package and use `--adopt`.
 We will demonstrate with an example of importing `my_new_file.el`
@@ -27,6 +28,7 @@ We will demonstrate with an example of importing `my_new_file.el`
 echo '(message "test")' >> ~/.emacs.d/my_new_file.el
 file ../.emacs.d/my_new_file.el
 # ../.emacs.d/my_new_file.el: ASCII text
+mkdir -p ~/.emacs.d
 touch emacs/.emacs.d/my_new_file.el
 stow --adopt emacs
 file ../.emacs.d/my_new_file.el
