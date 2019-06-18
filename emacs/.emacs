@@ -93,6 +93,8 @@ See https://stackoverflow.com/a/797552"
   (setq TeX-PDF-mode t))
 ;; Bash unit tests.
 (use-package bats-mode)
+;; Remove old packages.
+(package-autoremove)
 
 ;; GitHub packages.
 (defun use-package-github (package)
