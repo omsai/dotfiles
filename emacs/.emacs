@@ -99,7 +99,9 @@ See https://stackoverflow.com/a/797552"
   :init
   (add-hook 'org-mode-hook #'auto-fill-mode)
   :config
-  (setq fill-column 80))
+  (setq fill-column 80)
+  (setq org-file-apps
+	'(("\\.epub" . "ebook-viewer %s"))))
 ;; Remove old packages.
 (package-autoremove)
 
