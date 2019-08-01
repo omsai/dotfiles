@@ -93,6 +93,13 @@ See https://stackoverflow.com/a/797552"
   (setq TeX-PDF-mode t))
 ;; Bash unit tests.
 (use-package bats-mode)
+;; Org mode hooks.
+(use-package org
+  :ensure nil
+  :init
+  (add-hook 'org-mode-hook #'auto-fill-mode)
+  :config
+  (setq fill-column 80))
 ;; Remove old packages.
 (package-autoremove)
 
