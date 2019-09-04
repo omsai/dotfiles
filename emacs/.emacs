@@ -98,8 +98,8 @@ See https://stackoverflow.com/a/797552"
   :ensure nil
   :init
   (add-hook 'org-mode-hook #'auto-fill-mode)
-  :config
   (setq fill-column 80)
+  :config
   (setq org-file-apps
 	'(("\\.epub" . "ebook-viewer %s"))))
 ;; Org-ref.
