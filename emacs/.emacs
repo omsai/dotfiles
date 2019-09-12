@@ -103,14 +103,14 @@ See https://stackoverflow.com/a/797552"
   (setq org-file-apps
 	'(("\\.epub" . "ebook-viewer %s"))))
 ;; Org-ref.
-(use-package org-ref
-  :config
-  (setq reftex-default-bibliography '("~/Sync/bibliography/references.bib")
-	org-ref-bibliography-notes "~/Sync/bibliography/notes.org"
-	org-ref-pdf-directory "~/Sync/bibliography/bibtex-pdfs/")
-  (setq bibtex-completion-bibliography "~/Sync/bibliography/references.bib"
-	bibtex-completion-library-path "~/Sync/bibliography/bibtex-pdfs"
-	bibtex-completion-notes-path "~/Sync/bibliography/helm-bibtex-notes"))
+;; (use-package org-ref
+;;   :config
+;;   (setq reftex-default-bibliography '("~/Sync/bibliography/references.bib")
+;; 	org-ref-bibliography-notes "~/Sync/bibliography/notes.org"
+;; 	org-ref-pdf-directory "~/Sync/bibliography/bibtex-pdfs/")
+;;   (setq bibtex-completion-bibliography "~/Sync/bibliography/references.bib"
+;; 	bibtex-completion-library-path "~/Sync/bibliography/bibtex-pdfs"
+;; 	bibtex-completion-notes-path "~/Sync/bibliography/helm-bibtex-notes"))
 ;; Remove old packages.
 (package-autoremove)
 
