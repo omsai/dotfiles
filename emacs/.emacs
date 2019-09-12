@@ -17,7 +17,6 @@
 (setq save-abbrevs nil)
 (savehist-mode 1)
 (setq dired-listing-switches "-alh")
-(setq org-src-fontify-natively t)
 (defun my-c-mode-common-hook ()
   "Disable extra lambda indentation in 'c-mode' and related modes."
   (c-set-offset 'inlambda 0))
@@ -100,6 +99,7 @@ See https://stackoverflow.com/a/797552"
   (add-hook 'org-mode-hook #'auto-fill-mode)
   (setq fill-column 80)
   :config
+  (setq org-src-fontify-natively t)
   (setq org-file-apps
 	'(("\\.epub" . "ebook-viewer %s"))))
 ;; Org-ref.
