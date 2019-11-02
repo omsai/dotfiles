@@ -98,7 +98,6 @@ See https://stackoverflow.com/a/797552"
   :init
   (add-hook 'org-mode-hook #'auto-fill-mode)
   (setq fill-column 80)
-  :config
   (setq org-src-fontify-natively t)
   (setq org-file-apps
 	'(("\\.epub" . "ebook-viewer %s"))))
