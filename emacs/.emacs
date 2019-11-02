@@ -104,6 +104,13 @@ See https://stackoverflow.com/a/797552"
   (setq org-src-fontify-natively t)
   (setq org-file-apps
 	'(("\\.epub" . "ebook-viewer %s"))))
+(use-package org-agenda
+  :ensure nil
+  :init
+  (setq org-agenda-files
+	(list "~/corelab1"
+	      "~/Sync/schedule"))
+  (setq org-agenda-span 14))
 ;; Org-ref.
 ;; (use-package org-ref
 ;;   :config
