@@ -87,7 +87,7 @@ See https://stackoverflow.com/a/797552"
 ;; LaTeX PDF.
 (use-package tex
   :defer t
-  :ensure auctex
+  :ensure nil
   :config
   (setq TeX-PDF-mode t))
 ;; Bash unit tests.
