@@ -110,7 +110,8 @@ See https://stackoverflow.com/a/797552"
   (setq org-agenda-files
 	(list "~/corelab1"
 	      "~/Sync/schedule"))
-  (setq org-agenda-span 14))
+  (setq org-agenda-span 14)
+  (setq org-agenda-use-time-grid nil))
 ;; Org-ref.
 ;; (use-package org-ref
 ;;   :config
