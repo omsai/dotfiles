@@ -98,6 +98,7 @@ See https://stackoverflow.com/a/797552"
   :bind ("C-c a" . 'org-agenda)
   :init
   (add-hook 'org-mode-hook #'auto-fill-mode)
+  (add-hook 'org-mode-hook #'auto-revert-mode)
   (setq fill-column 80)
   (setq org-enforce-todo-dependencies t)
   (setq org-log-done 'time)
