@@ -109,6 +109,7 @@ See https://stackoverflow.com/a/797552"
   :init
   (setq org-agenda-files
 	(list "~/corelab1"
+	      "~/uits"
 	      "~/Sync/schedule"))
   (setq org-agenda-span 14)
   (setq org-agenda-use-time-grid nil))
