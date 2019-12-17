@@ -21,6 +21,7 @@
   "Disable extra lambda indentation in 'c-mode' and related modes."
   (c-set-offset 'inlambda 0))
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+(add-hook 'write-contents-hooks 'c-mode-untabify nil t)
 (defun un-mitm-url (url)
   "Deobfuscate URL from UConn's outlook protection.
 
