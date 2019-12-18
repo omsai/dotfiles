@@ -22,6 +22,8 @@
   (c-set-offset 'inlambda 0))
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 (add-hook 'write-contents-hooks 'c-mode-untabify nil t)
+(add-to-list 'auto-mode-alist '("\\.cu\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.cuh\\'" . c++-mode))
 (defun un-mitm-url (url)
   "Deobfuscate URL from UConn's outlook protection.
 
@@ -34,7 +36,7 @@ See https://stackoverflow.com/a/797552"
 
 ;; Package specific configuration.
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 ; Force refresh contents if new package installations fail.
 ;(package-refresh-contents)
