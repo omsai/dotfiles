@@ -138,7 +138,7 @@ See https://stackoverflow.com/a/797552"
 	    (shell-command (concat "git -C " install-dir " pull"))
 	(shell-command (concat "git clone " url " " install-dir)))
 	(load (concat (file-name-as-directory install-dir) dir ".el"))))))
-(use-package-github "wentasah/meson-mode")
+;(use-package-github "wentasah/meson-mode")
 
 ;; Restart emacs if any dotfiles were updated.  FIXME: One should only
 ;; need to restart if .emacs related files were updated.
