@@ -114,8 +114,7 @@ See https://stackoverflow.com/a/797552"
 	(list "~/corelab1"
 	      "~/uits"
 	      "~/Sync/schedule"))
-  (setq org-agenda-span 14)
-  (setq org-agenda-use-time-grid nil))
+  (setq org-agenda-span 14))
 ;; Org-ref.
 ;; (use-package org-ref
 ;;   :config
