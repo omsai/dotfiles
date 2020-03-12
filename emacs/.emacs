@@ -80,6 +80,10 @@ See https://stackoverflow.com/a/797552"
   :defer t)
 (use-package poly-R
   :requires poly-markdown)
+(use-package stan-mode
+  :ensure nil
+  :config
+  (setq indent-tabs-mode nil))
 ;; Continuous Integration.
 (use-package yaml-mode)
 ;; Git interface.
