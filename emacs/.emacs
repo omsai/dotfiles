@@ -84,6 +84,9 @@ See https://stackoverflow.com/a/797552"
   :ensure nil
   :config
   (setq indent-tabs-mode nil))
+(use-package minizinc-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.mzn\\'" . minizinc-mode)))
 ;; Continuous Integration.
 (use-package yaml-mode)
 ;; Git interface.
