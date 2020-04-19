@@ -89,6 +89,8 @@ See https://stackoverflow.com/a/797552"
 ;; Git interface.
 (use-package magit
   :bind ("C-x g" . magit-status))
+;; Build systems.
+(use-package meson-mode)
 ;; LaTeX PDF.
 (use-package tex
   :defer t
@@ -131,19 +133,6 @@ See https://stackoverflow.com/a/797552"
 ;; 	bibtex-completion-notes-path "~/Sync/bibliography/helm-bibtex-notes"))
 ;; Remove old packages.
 (package-autoremove)
-
-;; GitHub packages.
-(defun use-package-github (package)
-  "Install Emacs PACKAGE string 'user/package' from GitHub."
-  (unless (has-no-internet)
-    (let ((url (concat "https://github.com/" package))
-	  (dir (file-name-nondirectory package)))
-      (let ((install-dir (concat "~/.emacs.d/" dir)))
-	(if (file-directory-p install-dir)
-	    (shell-command (concat "git -C " install-dir " pull"))
-	(shell-command (concat "git clone " url " " install-dir)))
-	(load (concat (file-name-as-directory install-dir) dir ".el"))))))
-;(use-package-github "wentasah/meson-mode")
 
 ;; Restart emacs if any dotfiles were updated.  FIXME: One should only
 ;; need to restart if .emacs related files were updated.
