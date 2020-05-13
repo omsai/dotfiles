@@ -116,7 +116,8 @@ See https://stackoverflow.com/a/797552"
   (setq org-log-done 'time)
   (setq org-src-fontify-natively t)
   (setq org-file-apps
-	'(("\\.epub" . "ebook-viewer %s"))))
+	'(("\\.epub" . "ebook-viewer %s")))
+  (org-babel-do-load-languages 'org-babel-load-languages '((R . t))))
 (use-package org-agenda
   :ensure nil
   :init
