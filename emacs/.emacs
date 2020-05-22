@@ -56,6 +56,8 @@ See https://stackoverflow.com/a/797552"
   (global-flycheck-mode)
   :init
   (setq-default flycheck-disabled-checkers '(c/c++-clang)))
+;; Refactoring.
+(use-package iedit)
 ;; Python.
 (use-package elpy
   :config
