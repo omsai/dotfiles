@@ -25,7 +25,10 @@
 (defun un-mitm-url (url)
   "Deobfuscate URL from UConn's outlook protection.
 
-See https://stackoverflow.com/a/797552"
+Run the function in the scratch Lisp Interaction buffer using
+\\[eval-print-last-sexp] or its more convenient keymap shortcut.
+
+See URL `https://stackoverflow.com/a/797552;."
   (interactive "Murl: ")
   (apply 'last (apply 'last (last (url-parse-query-string (url-unhex-string url))))))
 (defun has-no-internet ()
