@@ -131,6 +131,7 @@ See URL `https://stackoverflow.com/a/797552;."
 	      "~/uits"
 	      "~/Sync/schedule"))
   (setq org-agenda-span 14))
+(use-package org-kanban)
 ;; Org-ref.
 ;; (use-package org-ref
 ;;   :config
