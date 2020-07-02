@@ -123,9 +123,16 @@ See URL `https://stackoverflow.com/a/797552;."
   (setq org-file-apps
 	'(("\\.epub" . "ebook-viewer %s")))
   (org-babel-do-load-languages 'org-babel-load-languages '((R . t))))
+(use-package appt
+  :ensure nil
+  :config
+  (setq appt-display-duration 725)	; seconds.
+  (setq appt-display-interval 1)	; minute.
+  (appt-activate t))
 (use-package org-agenda
   :ensure nil
   :init
+  (add-hook 'org-agenda-finalize-hook 'org-agenda-to-appt 'append)
   (setq org-agenda-files
 	(list "~/corelab1"
 	      "~/uits"
