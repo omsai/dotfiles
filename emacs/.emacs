@@ -128,6 +128,18 @@ See URL `https://stackoverflow.com/a/797552;."
   :config
   (setq appt-display-duration 725)	; seconds.
   (setq appt-display-interval 1)	; minute.
+  (setq appt-display-format 'window)
+  (require 'notifications)		; Load notifications-notify.
+  (defun notify-send (title body)
+    (interactive)
+    (if (eq window-system 'x)
+	(notifications-notify
+	 :title title
+	 :body body
+	 :timeout (* 60000 appt-display-interval))))
+  (defun notify-send-wrap (mins new-time body)
+    (notify-send (format "Appointment in %s min(s)" mins) body))
+  (setq appt-disp-window-function (function notify-send-wrap))
   (appt-activate t))
 (use-package org-agenda
   :ensure nil
