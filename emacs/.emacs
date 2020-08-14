@@ -87,7 +87,6 @@ See URL `https://stackoverflow.com/a/797552;."
 (use-package poly-R
   :requires poly-markdown)
 (use-package stan-mode
-  :ensure nil
   :config
   (setq indent-tabs-mode nil))
 (use-package minizinc-mode
