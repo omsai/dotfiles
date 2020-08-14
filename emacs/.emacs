@@ -124,9 +124,28 @@ See URL `https://stackoverflow.com/a/797552;."
   (setq org-file-apps
 	'(("\\.epub" . "ebook-viewer %s")))
   (org-babel-do-load-languages 'org-babel-load-languages '((R . t))))
+(use-package appt
+  :ensure nil
+  :config
+  (setq appt-display-duration 725)	; seconds.
+  (setq appt-display-interval 1)	; minute.
+  (setq appt-display-format 'window)
+  (require 'notifications)		; Load notifications-notify.
+  (defun notify-send (title body)
+    (interactive)
+    (if (eq window-system 'x)
+	(notifications-notify
+	 :title title
+	 :body body
+	 :timeout (* 60000 appt-display-interval))))
+  (defun notify-send-wrap (mins new-time body)
+    (notify-send (format "Appointment in %s min(s)" mins) body))
+  (setq appt-disp-window-function (function notify-send-wrap))
+  (appt-activate t))
 (use-package org-agenda
   :ensure nil
   :init
+  (add-hook 'org-agenda-finalize-hook 'org-agenda-to-appt 'append)
   (setq org-agenda-files
 	(list "~/corelab1"
 	      "~/uits"
