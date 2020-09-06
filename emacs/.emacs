@@ -122,7 +122,9 @@ See URL `https://stackoverflow.com/a/797552;."
   (setq org-src-fontify-natively t)
   (setq org-file-apps
 	'(("\\.epub" . "ebook-viewer %s")))
-  (org-babel-do-load-languages 'org-babel-load-languages '((R . t)))
+  (org-babel-do-load-languages 'org-babel-load-languages
+			       '((R . t)
+				 (latex . t)))
   (setq org-confirm-babel-evaluate nil))
 (use-package appt
   :ensure nil
