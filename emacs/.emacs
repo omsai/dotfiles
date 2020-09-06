@@ -122,7 +122,8 @@ See URL `https://stackoverflow.com/a/797552;."
   (setq org-src-fontify-natively t)
   (setq org-file-apps
 	'(("\\.epub" . "ebook-viewer %s")))
-  (org-babel-do-load-languages 'org-babel-load-languages '((R . t))))
+  (org-babel-do-load-languages 'org-babel-load-languages '((R . t)))
+  (setq org-confirm-babel-evaluate nil))
 (use-package appt
   :ensure nil
   :config
@@ -160,6 +161,9 @@ See URL `https://stackoverflow.com/a/797552;."
 ;;   (setq bibtex-completion-bibliography "~/Sync/bibliography/references.bib"
 ;; 	bibtex-completion-library-path "~/Sync/bibliography/bibtex-pdfs"
 ;; 	bibtex-completion-notes-path "~/Sync/bibliography/helm-bibtex-notes"))
+(use-package ledger-mode
+  :init
+  (setq ledger-binary-path "hledger"))
 ;; Remove old packages.
 (package-autoremove)
 
