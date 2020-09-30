@@ -24,6 +24,7 @@
 (add-hook 'write-contents-hooks 'c-mode-untabify nil t)
 (add-to-list 'auto-mode-alist '("\\.cu\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.cuh\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.j2\\'" . jinja2-mode))
 (defun un-mitm-url (url)
   "Deobfuscate URL from UConn's outlook protection.
 
