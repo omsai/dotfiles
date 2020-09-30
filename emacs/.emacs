@@ -28,11 +28,14 @@
 (defun un-mitm-url (url)
   "Deobfuscate URL from UConn's outlook protection.
 
-See https://stackoverflow.com/a/797552"
+Run the function in the scratch Lisp Interaction buffer using
+\\[eval-print-last-sexp] or its more convenient keymap shortcut.
+
+See URL `https://stackoverflow.com/a/797552;."
   (interactive "Murl: ")
   (apply 'last (apply 'last (last (url-parse-query-string (url-unhex-string url))))))
 (defun has-no-internet ()
-  "Return true if no internet."
+  "Return non-nil if no internet."
   (not (equal 0 (call-process "ping" nil nil nil "-c" "1" "-W" "1" "eff.org"))))
 
 ;; Package specific configuration.
@@ -50,6 +53,7 @@ See https://stackoverflow.com/a/797552"
   (setq use-package-compute-statistics t)
   (setq use-package-always-ensure t)
   (use-package auto-package-update
+    :ensure t
     :config
     (setq auto-package-update-delete-old-versions t)
     (setq auto-package-update-hide-results t)
@@ -59,6 +63,8 @@ See https://stackoverflow.com/a/797552"
   (global-flycheck-mode)
   :init
   (setq-default flycheck-disabled-checkers '(c/c++-clang)))
+;; Refactoring.
+(use-package iedit)
 ;; Python.
 (use-package elpy
   :config
@@ -74,6 +80,7 @@ See https://stackoverflow.com/a/797552"
   (setq
    ;; Don't use python2, even if it's available.
    elpy-rpc-python-command "python3"
+   elpy-rpc-virtualenv-path 'current
    ;; Use jupyter interpreter.
    python-shell-interpreter (expand-file-name "~/.local/bin/jupyter")
    python-shell-interpreter-args "console --simple-prompt"
@@ -83,16 +90,25 @@ See https://stackoverflow.com/a/797552"
   :defer t)
 (use-package poly-R
   :requires poly-markdown)
+(use-package stan-mode
+  :config
+  (setq indent-tabs-mode nil))
+(use-package minizinc-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.mzn\\'" . minizinc-mode)))
 ;; Continuous Integration.
 (use-package yaml-mode)
 ;; Git interface.
 (use-package magit
   :bind ("C-x g" . magit-status))
+;; Build systems.
+(use-package meson-mode)
 ;; LaTeX PDF.
 (use-package tex
   :defer t
   :ensure nil
   :config
+  (defvar TeX-PDF-mode)
   (setq TeX-PDF-mode t))
 ;; Bash unit tests.
 (use-package bats-mode)
@@ -105,19 +121,43 @@ See https://stackoverflow.com/a/797552"
   (add-hook 'org-mode-hook #'auto-revert-mode)
   (setq fill-column 80)
   (setq org-enforce-todo-dependencies t)
+  (setq org-list-allow-alphabetical t)
   (setq org-log-done 'time)
   (setq org-src-fontify-natively t)
   (setq org-file-apps
-	'(("\\.epub" . "ebook-viewer %s"))))
+	'(("\\.epub" . "ebook-viewer %s")))
+  (org-babel-do-load-languages 'org-babel-load-languages
+			       '((R . t)
+				 (latex . t)))
+  (setq org-confirm-babel-evaluate nil))
+(use-package appt
+  :ensure nil
+  :config
+  (setq appt-display-duration 725)	; seconds.
+  (setq appt-display-interval 1)	; minute.
+  (setq appt-display-format 'window)
+  (require 'notifications)		; Load notifications-notify.
+  (defun notify-send (title body)
+    (interactive)
+    (if (eq window-system 'x)
+	(notifications-notify
+	 :title title
+	 :body body
+	 :timeout (* 60000 appt-display-interval))))
+  (defun notify-send-wrap (mins new-time body)
+    (notify-send (format "Appointment in %s min(s)" mins) body))
+  (setq appt-disp-window-function (function notify-send-wrap))
+  (appt-activate t))
 (use-package org-agenda
   :ensure nil
   :init
+  (add-hook 'org-agenda-finalize-hook 'org-agenda-to-appt 'append)
   (setq org-agenda-files
 	(list "~/corelab1"
 	      "~/uits"
 	      "~/Sync/schedule"))
-  (setq org-agenda-span 14)
-  (setq org-agenda-use-time-grid nil))
+  (setq org-agenda-span 14))
+(use-package org-kanban)
 ;; Org-ref.
 ;; (use-package org-ref
 ;;   :config
@@ -127,21 +167,11 @@ See https://stackoverflow.com/a/797552"
 ;;   (setq bibtex-completion-bibliography "~/Sync/bibliography/references.bib"
 ;; 	bibtex-completion-library-path "~/Sync/bibliography/bibtex-pdfs"
 ;; 	bibtex-completion-notes-path "~/Sync/bibliography/helm-bibtex-notes"))
+(use-package ledger-mode
+  :init
+  (setq ledger-binary-path "hledger"))
 ;; Remove old packages.
 (package-autoremove)
-
-;; GitHub packages.
-(defun use-package-github (package)
-  "Install Emacs PACKAGE string 'user/package' from GitHub."
-  (unless (has-no-internet)
-    (let ((url (concat "https://github.com/" package))
-	  (dir (file-name-nondirectory package)))
-      (let ((install-dir (concat "~/.emacs.d/" dir)))
-	(if (file-directory-p install-dir)
-	    (shell-command (concat "git -C " install-dir " pull"))
-	(shell-command (concat "git clone " url " " install-dir)))
-	(load (concat (file-name-as-directory install-dir) dir ".el"))))))
-(use-package-github "wentasah/meson-mode")
 
 ;; Restart emacs if any dotfiles were updated.  FIXME: One should only
 ;; need to restart if .emacs related files were updated.

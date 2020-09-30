@@ -25,15 +25,27 @@ To import a file, touch the file inside your stow package and use `--adopt`.
 We will demonstrate with an example of importing `my_new_file.el`
 
 ```sh
+# *** Ensure the working directory is the root of this git repository.
+echo "${PWD/#$HOME/\~}"
+~/.dotfiles
+
+# *** Generate a toy file to import.
+mkdir -p ~/.emacs.d
 echo '(message "test")' >> ~/.emacs.d/my_new_file.el
+
+# *** Create an empty placeholder in our stow directory.
+mkdir -p emacs/.emacs.d
+touch emacs/.emacs.d/my_new_file.el
+
+# *** Import our toy file into stow.
 file ../.emacs.d/my_new_file.el
 # ../.emacs.d/my_new_file.el: ASCII text
-mkdir -p ~/.emacs.d
-touch emacs/.emacs.d/my_new_file.el
 stow --adopt emacs
 file ../.emacs.d/my_new_file.el
 # ../.emacs.d/my_new_file.el: symbolic link to ../.dotfiles/emacs/.emacs.d/my_new_file.el
 cat emacs/.emacs.d/my_new_file.el
 # (message "test")
+
+# *** Remove all demo files.
 rm {emacs,~}/.emacs.d/my_new_file.el
 ```
