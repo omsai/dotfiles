@@ -40,7 +40,7 @@ See URL `https://stackoverflow.com/a/797552;."
 
 ;; Package specific configuration.
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://www.mirrorservice.org/sites/melpa.org/packages/") t)
 (package-initialize)
 ; Force refresh contents if new package installations fail.
 ;(package-refresh-contents)
