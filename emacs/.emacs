@@ -151,6 +151,7 @@ See URL `https://stackoverflow.com/a/797552;."
 (use-package org-agenda
   :ensure nil
   :init
+  (add-to-list 'org-modules 'org-habit t)
   (add-hook 'org-agenda-finalize-hook 'org-agenda-to-appt 'append)
   (setq org-agenda-files
 	(list "~/corelab1"
