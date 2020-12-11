@@ -109,7 +109,8 @@ See URL `https://stackoverflow.com/a/797552;."
   :ensure nil
   :config
   (defvar TeX-PDF-mode)
-  (setq TeX-PDF-mode t))
+  (setq TeX-PDF-mode t)
+  (setq LaTeX-verbatim-environments-local '("Verbatim" "lstlisting")))
 ;; Bash unit tests.
 (use-package bats-mode)
 ;; Org mode hooks.
