@@ -107,6 +107,8 @@ See URL `https://stackoverflow.com/a/797552;."
 (use-package tex
   :defer t
   :ensure nil
+  :init
+  (add-hook 'LaTeX-mode-hook 'flyspell-mode)
   :config
   (defvar TeX-PDF-mode)
   (setq TeX-PDF-mode t)
