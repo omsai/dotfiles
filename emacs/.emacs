@@ -160,6 +160,7 @@ See URL `https://stackoverflow.com/a/797552;."
 	(list "~/corelab1"
 	      "~/uits"
 	      "~/Sync/schedule"))
+  (setq org-agenda-window-setup "current-window")
   (setq org-agenda-span 14)
   (setq org-agenda-use-time-grid nil))
 (use-package org-kanban)
