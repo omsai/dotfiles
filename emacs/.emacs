@@ -62,7 +62,9 @@ See URL `https://stackoverflow.com/a/797552;."
   :config
   (global-flycheck-mode)
   :init
-  (setq-default flycheck-disabled-checkers '(c/c++-clang)))
+  (setq-default flycheck-disabled-checkers '(c/c++-clang))
+  (lambda ()
+    (add-to-list 'flycheck-gcc-include-path "/usr/share/R/include")))
 ;; Refactoring.
 (use-package iedit)
 ;; Python.
