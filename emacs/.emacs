@@ -133,7 +133,8 @@ See URL `https://stackoverflow.com/a/797552;."
 	'(("\\.epub" . "ebook-viewer %s")))
   (org-babel-do-load-languages 'org-babel-load-languages
 			       '((R . t)
-				 (latex . t)))
+				 (latex . t)
+				 (shell . t)))
   (setq org-confirm-babel-evaluate nil))
 (use-package appt
   :ensure nil
