@@ -95,7 +95,8 @@ See URL `https://stackoverflow.com/a/797552;."
 (use-package ess
   :defer t)
 (use-package poly-R
-  :requires poly-markdown)
+  :config
+  (add-to-list 'auto-mode-alist '("\\.Rmd\\'" . poly-markdown+r-mode)))
 (use-package stan-mode
   :config
   (setq indent-tabs-mode nil))
