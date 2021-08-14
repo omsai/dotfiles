@@ -39,8 +39,12 @@ See URL `https://stackoverflow.com/a/797552;."
   (not (equal 0 (call-process "ping" nil nil nil "-c" "1" "-W" "1" "eff.org"))))
 
 ;; Package specific configuration.
+;;
+;; Workaround known error with emacs <= 26.2 "Failed to download
+;; 'melpa' archive"
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://www.mirrorservice.org/sites/melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 ; Force refresh contents if new package installations fail.
 ;(package-refresh-contents)
