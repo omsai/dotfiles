@@ -111,6 +111,7 @@ See URL `https://stackoverflow.com/a/797552;."
   :bind ("C-x g" . magit-status))
 ;; Build systems.
 (use-package meson-mode)
+(use-package ninja-mode)
 ;; LaTeX PDF.
 (use-package tex
   :defer t
