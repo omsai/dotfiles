@@ -37,6 +37,16 @@ See URL `https://stackoverflow.com/a/797552;."
 (defun has-no-internet ()
   "Return non-nil if no internet."
   (not (equal 0 (call-process "ping" nil nil nil "-c" "1" "-W" "1" "eff.org"))))
+(defun up-directory (path)
+  "Move up a directory in PATH without affecting the kill buffer."
+  (interactive "p")
+  (if (string-match-p "/." (minibuffer-contents))
+      (let ((end (point)))
+	(re-search-backward "/.")
+	(forward-char)
+	(delete-region (point) end))))
+(define-key minibuffer-local-filename-completion-map
+  [C-backspace] #'up-directory)
 
 ;; Package specific configuration.
 ;;
