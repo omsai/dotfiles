@@ -104,7 +104,9 @@ See URL `https://stackoverflow.com/a/797552;."
    python-shell-prompt-detect-failure-warning nil))
 ;; R.
 (use-package ess
-  :defer t)
+  :defer t
+  :config
+  (setq ess-auto-width 'window))
 (use-package poly-R
   :config
   (add-to-list 'auto-mode-alist '("\\.Rmd\\'" . poly-markdown+r-mode)))
