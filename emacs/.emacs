@@ -37,6 +37,16 @@ See URL `https://stackoverflow.com/a/797552;."
 (defun has-no-internet ()
   "Return non-nil if no internet."
   (not (equal 0 (call-process "ping" nil nil nil "-c" "1" "-W" "1" "eff.org"))))
+(defun up-directory (path)
+  "Move up a directory in PATH without affecting the kill buffer."
+  (interactive "p")
+  (if (string-match-p "/." (minibuffer-contents))
+      (let ((end (point)))
+	(re-search-backward "/.")
+	(forward-char)
+	(delete-region (point) end))))
+(define-key minibuffer-local-filename-completion-map
+  [C-backspace] #'up-directory)
 
 ;; Package specific configuration.
 ;;
@@ -70,8 +80,8 @@ See URL `https://stackoverflow.com/a/797552;."
   (setq flycheck-gcc-openmp t)
   (lambda ()
     (add-to-list 'flycheck-gcc-include-path "/usr/share/R/include")))
-;; Refactoring.
-(use-package iedit)
+(use-package ace-window
+  :bind ("M-o" . ace-window))
 ;; Python.
 (use-package elpy
   :config
@@ -94,7 +104,9 @@ See URL `https://stackoverflow.com/a/797552;."
    python-shell-prompt-detect-failure-warning nil))
 ;; R.
 (use-package ess
-  :defer t)
+  :defer t
+  :config
+  (setq ess-auto-width 'window))
 (use-package poly-R
   :config
   (add-to-list 'auto-mode-alist '("\\.Rmd\\'" . poly-markdown+r-mode)))
