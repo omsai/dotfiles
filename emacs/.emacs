@@ -81,6 +81,8 @@ See URL `https://stackoverflow.com/a/797552;."
   (lambda ()
     (add-to-list 'flycheck-gcc-include-path "/usr/share/R/include")))
 (use-package ace-window
+  :init
+  (winner-mode)
   :bind ("M-o" . ace-window))
 ;; Python.
 (use-package elpy
