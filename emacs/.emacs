@@ -182,9 +182,11 @@ See URL `https://stackoverflow.com/a/797552;."
   (add-to-list 'org-modules 'org-habit t)
   (add-hook 'org-agenda-finalize-hook 'org-agenda-to-appt 'append)
   (setq org-agenda-files
-	(list "~/corelab1"
-	      "~/uits"
-	      "~/Sync/schedule"))
+	(seq-filter
+	 (lambda (elt) (file-exists-p elt))
+	 '("~/corelab1"
+	   "~/uits"
+	   "~/Sync/schedule")))
   (setq org-agenda-window-setup "current-window")
   (setq org-agenda-span 14)
   (setq org-agenda-use-time-grid nil))
