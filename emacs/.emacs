@@ -204,6 +204,7 @@ See URL `https://stackoverflow.com/a/797552;."
 (use-package font-lock-studio)
 ;; Local packages.
 (use-package shell-session-mode
+  :if (file-exists-p "~/.emacs.d/lisp/shell-session-mode.el")
   :load-path "lisp"
   :ensure nil)
 ;; Remove old packages.
