@@ -80,6 +80,7 @@ See URL `https://stackoverflow.com/a/797552;."
   (setq flycheck-gcc-openmp t)
   (lambda ()
     (add-to-list 'flycheck-gcc-include-path "/usr/share/R/include")))
+(use-package flyspell)
 (use-package ace-window
   :init
   (winner-mode)
@@ -131,7 +132,7 @@ See URL `https://stackoverflow.com/a/797552;."
   :defer t
   :ensure nil
   :init
-  (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+  (add-hook 'LaTeX-mode-hook #'flyspell-mode)
   :config
   (defvar TeX-PDF-mode)
   (setq TeX-PDF-mode t)
@@ -145,6 +146,7 @@ See URL `https://stackoverflow.com/a/797552;."
   :init
   (add-hook 'org-mode-hook #'auto-fill-mode)
   (add-hook 'org-mode-hook #'auto-revert-mode)
+  (add-hook 'org-mode-hook #'flyspell-mode)
   (setq fill-column 80)
   (setq org-agenda-sticky t)
   (setq org-enforce-todo-dependencies t)
