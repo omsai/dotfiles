@@ -169,11 +169,16 @@ See URL `https://stackoverflow.com/a/797552;."
   (require 'notifications)		; Load notifications-notify.
   (defun notify-send (title body)
     (interactive)
-    (if (eq window-system 'x)
+    (cl-case (window-system)
+      ('x?
 	(notifications-notify
 	 :title title
 	 :body body
-	 :timeout (* 60000 appt-display-interval))))
+	 :timeout (* 60000 appt-display-interval)))
+      ('ns?
+       (ns-do-applescript
+	(format "display notification \"%s\" with title \"%s\""
+		body title)))))
   (defun notify-send-wrap (mins new-time body)
     (notify-send (format "Appointment in %s min(s)" mins) body))
   (setq appt-disp-window-function (function notify-send-wrap))
