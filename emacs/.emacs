@@ -193,6 +193,7 @@ See URL `https://stackoverflow.com/a/797552;."
 	 (lambda (elt) (file-exists-p elt))
 	 '("~/corelab1"
 	   "~/uits"
+	   "~/kirschner-lab/schedule"
 	   "~/Sync/schedule")))
   (setq org-agenda-window-setup "current-window")
   (setq org-agenda-span 14)
