@@ -149,6 +149,14 @@ See URL `https://stackoverflow.com/a/797552;."
   (add-hook 'org-mode-hook #'flyspell-mode)
   (setq fill-column 80)
   (setq org-agenda-sticky t)
+  (if (eq system-type 'darwin)
+      (setq org-agenda-prefix-format
+	    '(;; Remove the filename column from the agenda because all items
+	      ;; are from the lab notebook.
+	      (agenda . " %i %?-12t% s")
+	      (todo . " %i %-12:c")
+	      (tags . " %i %-12:c")
+	      (search . " %i %-12:c"))))
   (setq org-enforce-todo-dependencies t)
   (setq org-list-allow-alphabetical t)
   (setq org-log-done 'time)
