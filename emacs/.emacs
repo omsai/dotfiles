@@ -168,28 +168,21 @@ See URL `https://stackoverflow.com/a/797552;."
 				 (latex . t)
 				 (shell . t)))
   (setq org-confirm-babel-evaluate nil))
+(use-package alert
+  :config
+  (setq alert-default-style
+	(cl-case (window-system)
+	  (x 'notifications)
+	  (ns 'osx-notifier))))
 (use-package appt
   :ensure nil
   :config
   (setq appt-display-duration 725)	; seconds.
   (setq appt-display-interval 1)	; minute.
   (setq appt-display-format 'window)
-  (require 'notifications)		; Load notifications-notify.
-  (defun notify-send (title body)
-    (interactive)
-    (cl-case (window-system)
-      ('x?
-	(notifications-notify
-	 :title title
-	 :body body
-	 :timeout (* 60000 appt-display-interval)))
-      ('ns?
-       (ns-do-applescript
-	(format "display notification \"%s\" with title \"%s\""
-		body title)))))
-  (defun notify-send-wrap (mins new-time body)
-    (notify-send (format "Appointment in %s min(s)" mins) body))
-  (setq appt-disp-window-function (function notify-send-wrap))
+  (defun alert-wrap (mins new-time body)
+    (alert body :title (format "Appointment in %s min(s)" mins)))
+  (setq appt-disp-window-function (function alert-wrap))
   (appt-activate t))
 (use-package org-agenda
   :ensure nil
