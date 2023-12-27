@@ -83,6 +83,7 @@ See URL `https://stackoverflow.com/a/797552;."
 (use-package flyspell)
 (use-package ace-window
   :init
+  (windmove-default-keybindings)
   (winner-mode)
   :bind ("M-o" . ace-window))
 ;; Python.
