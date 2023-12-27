@@ -137,7 +137,8 @@ See URL `https://stackoverflow.com/a/797552;."
   :config
   (defvar TeX-PDF-mode)
   (setq TeX-PDF-mode t)
-  (setq LaTeX-verbatim-environments-local '("Verbatim" "lstlisting")))
+  ;; Fix fontification, etc. https://emacs.stackexchange.com/a/30430
+  (setq TeX-parse-self t))
 ;; Bash unit tests.
 (use-package bats-mode)
 ;; Org mode hooks.
