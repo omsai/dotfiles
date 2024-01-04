@@ -231,6 +231,7 @@ See URL `https://stackoverflow.com/a/797552;."
 (use-package ledger-mode
   :init
   (setq ledger-binary-path "hledger"))
+(use-package tj3-mode)
 (use-package font-lock-studio)
 ;; Local packages.
 (use-package shell-session-mode
