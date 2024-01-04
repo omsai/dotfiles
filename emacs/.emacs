@@ -86,6 +86,7 @@ See URL `https://stackoverflow.com/a/797552;."
   :init
   (winner-mode)
   :bind ("M-o" . ace-window))
+(use-package unfill)
 (use-package detached
   :if
   (locate-file "dtach" exec-path)
