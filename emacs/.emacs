@@ -72,6 +72,7 @@ See URL `https://stackoverflow.com/a/797552;."
     (setq auto-package-update-delete-old-versions t)
     (setq auto-package-update-hide-results t)
     (auto-package-update-maybe)))
+;; General purpose.
 (use-package flycheck
   :config
   (global-flycheck-mode)
