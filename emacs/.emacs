@@ -76,7 +76,8 @@ See URL `https://stackoverflow.com/a/797552;."
   :config
   (global-flycheck-mode)
   :init
-  (setq-default flycheck-disabled-checkers '(c/c++-clang))
+  (unless (eq system-type 'darwin)
+    (setq-default flycheck-disabled-checkers '(c/c++-clang)))
   (setq flycheck-gcc-openmp t)
   (lambda ()
     (add-to-list 'flycheck-gcc-include-path "/usr/share/R/include")))
