@@ -127,7 +127,8 @@ See URL `https://stackoverflow.com/a/797552;."
 (use-package ess
   :defer t
   :config
-  (setq ess-auto-width 'window))
+  (setq ess-auto-width 'window)
+  (setq ess-style 'RStudio))
 (use-package poly-R
   :config
   (add-to-list 'auto-mode-alist '("\\.Rmd\\'" . poly-markdown+r-mode)))
