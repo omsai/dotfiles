@@ -1,6 +1,8 @@
 
 local({
     options(
+        ## Default CRAN mirror.
+        repos = c(CRAN = "https://cloud.r-project.org"),
         ## Increase download timeout for Bioconductor genomes.
         timeout = 3600,
         ## Parallelize package installation.
