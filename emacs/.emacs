@@ -127,10 +127,10 @@ See URL `https://emacs.stackexchange.com/a/31009;."
       'python-shell-completion-native-disabled-interpreters "jupyter")))
   (setq
    ;; Don't use python2, even if it's available.
-   elpy-rpc-python-command (executable-find "python3")
+   elpy-rpc-python-command "python3"
    elpy-rpc-virtualenv-path 'current
    ;; Use jupyter interpreter.
-   python-shell-interpreter (executable-find "jupyter")
+   python-shell-interpreter "jupyter"
    python-shell-interpreter-args "console --simple-prompt"
    python-shell-prompt-detect-failure-warning nil))
 ;; R.
