@@ -34,6 +34,15 @@ Run the function in the scratch Lisp Interaction buffer using
 See URL `https://stackoverflow.com/a/797552;."
   (interactive "Murl: ")
   (apply 'last (apply 'last (last (url-parse-query-string (url-unhex-string url))))))
+(defun open-terminal-here ()
+  "Open macOS Terminal.app GUI in the current directory.
+
+See URL `https://emacs.stackexchange.com/a/31009;."
+  (interactive)
+  (shell-command
+   (concat "open -a Terminal "
+           (shell-quote-argument (expand-file-name
+                                  default-directory))) nil nil))
 (defun has-no-internet ()
   "Return non-nil if no internet."
   (not (equal 0 (call-process "ping" nil nil nil "-c" "1" "-W" "1" "eff.org"))))
