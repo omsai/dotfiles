@@ -256,7 +256,7 @@ See URL `https://emacs.stackexchange.com/a/31009;."
   "Return first directory in PATH with trailing slash.
 
 Emacs doesn't provide a directory separator character, so this
-function recursively runs 'file-name-directory' until nil, and
+function recursively runs \='file-name-directory\=' until nil, and
 returns the directory before it became nil."
   (let ((path-new (file-name-directory path)))
     (if path-new
