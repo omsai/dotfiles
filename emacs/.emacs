@@ -182,9 +182,7 @@ See URL `https://emacs.stackexchange.com/a/31009;."
   (setq org-agenda-sticky t)
   (if (eq system-type 'darwin)
       (setq org-agenda-prefix-format
-	    '(;; Remove the filename column from the agenda because all items
-	      ;; are from the lab notebook.
-	      (agenda . " %i %?-12t% s")
+	    '((agenda . "%-7:c%?-12t% s")
 	      (todo . " %i %-12:c")
 	      (tags . " %i %-12:c")
 	      (search . " %i %-12:c"))))
