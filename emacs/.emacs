@@ -137,6 +137,8 @@ See URL `https://emacs.stackexchange.com/a/31009;."
 ;; R.
 (use-package ess
   :defer t
+  :init
+  (require 'ess-r-mode)
   :config
   (setq ess-auto-width 'window)
   (setq ess-style 'RStudio))
