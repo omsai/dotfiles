@@ -17,6 +17,7 @@
 (setq save-abbrevs nil)
 (savehist-mode 1)
 (setq dired-listing-switches "-alh")
+(semantic-mode 1)
 (defun my-c-mode-common-hook ()
   "Disable extra lambda indentation in 'c-mode' and related modes."
   (c-set-offset 'inlambda 0))
