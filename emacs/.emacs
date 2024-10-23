@@ -166,7 +166,8 @@ See URL `https://emacs.stackexchange.com/a/31009;."
   (defvar TeX-PDF-mode)
   (setq TeX-PDF-mode t)
   ;; Fix fontification, etc. https://emacs.stackexchange.com/a/30430
-  (setq TeX-parse-self t))
+  (setq TeX-parse-self t)
+  (setq TeX-tree-roots '("/usr/local/texlive/2023/texmf-dist")))
 ;; Bash unit tests.
 (use-package bats-mode)
 ;; Org mode hooks.
