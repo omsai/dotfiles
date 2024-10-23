@@ -224,6 +224,7 @@ See URL `https://emacs.stackexchange.com/a/31009;."
 	 '("~/corelab1"
 	   "~/uits"
 	   "~/kirschner-lab/schedule"
+	   "~/shoemaker-lab/schedule"
 	   "~/Sync/schedule")))
   (setq org-agenda-window-setup "current-window")
   (setq org-agenda-span 14)
