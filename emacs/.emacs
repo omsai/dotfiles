@@ -212,6 +212,10 @@ See URL `https://emacs.stackexchange.com/a/31009;."
   (defun alert-wrap (mins new-time body)
     (alert body :title (format "Appointment in %s min(s)" mins)))
   (setq appt-disp-window-function (function alert-wrap))
+  (advice-add 'appt-check
+	      :before
+	      (lambda (&rest args)
+		(org-agenda-to-appt t)))
   (appt-activate t))
 (use-package org-agenda
   :ensure nil
