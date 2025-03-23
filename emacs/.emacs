@@ -133,7 +133,10 @@ See URL `https://emacs.stackexchange.com/a/31009;."
    ;; Use jupyter interpreter.
    python-shell-interpreter "jupyter"
    python-shell-interpreter-args "console --simple-prompt"
-   python-shell-prompt-detect-failure-warning nil))
+   python-shell-prompt-detect-failure-warning nil
+   ;; Workaround for
+   ;; https://github.com/jorgenschaefer/elpy/issues/1976
+   elpy-shell-echo-output nil))
 ;; R.
 (use-package ess
   :defer t
