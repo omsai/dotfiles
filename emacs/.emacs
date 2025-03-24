@@ -170,7 +170,18 @@ See URL `https://emacs.stackexchange.com/a/31009;."
   (setq TeX-PDF-mode t)
   ;; Fix fontification, etc. https://emacs.stackexchange.com/a/30430
   (setq TeX-parse-self t)
-  (setq TeX-tree-roots '("/usr/local/texlive/2023/texmf-dist")))
+  (setq TeX-tree-roots
+	(if (locate-file "tlmgr" exec-path)
+	    (progn
+	      (let ((lines (process-lines "tlmgr" "conf")))
+		(list (replace-regexp-in-string
+		       "^[^=]+=" ""
+		       (elt
+			(seq-filter
+			 (lambda (line) (string-prefix-p "TEXMFDIST" line))
+			 lines)
+			0)))))
+	  nil)))
 ;; Bash unit tests.
 (use-package bats-mode)
 ;; Org mode hooks.
