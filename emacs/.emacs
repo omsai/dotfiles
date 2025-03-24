@@ -144,7 +144,20 @@ See URL `https://emacs.stackexchange.com/a/31009;."
   (require 'ess-r-mode)
   :config
   (setq ess-auto-width 'window)
-  (setq ess-style 'RStudio))
+  (setq ess-style 'RStudio)
+  (setq ess-own-style-list
+	'((ess-indent-offset . 4)
+	  (ess-offset-arguments . open-delim)
+	  (ess-offset-arguments-newline . prev-call)
+	  (ess-offset-block . prev-line)
+	  (ess-offset-continued . straight)
+	  (ess-align-nested-calls "ifelse")
+	  (ess-align-arguments-in-calls "function[ 	]*(")
+	  (ess-align-continuations-in-calls . t)
+	  (ess-align-blocks control-flow)
+	  (ess-indent-from-lhs arguments fun-decl-opening)
+	  (ess-indent-from-chain-start . t)
+	  (ess-indent-with-fancy-comments . t))))
 (use-package poly-R
   :config
   (add-to-list 'auto-mode-alist '("\\.Rmd\\'" . poly-markdown+r-mode)))
