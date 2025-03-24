@@ -7,9 +7,16 @@ local({
         timeout = 3600,
         ## Parallelize package installation.
         Ncpus = parallel::detectCores(),
-        ## Package authorship.
-        devtools.name = "Pariksheet Nanda",
-        devtools.desc.author = "Pariksheet Nanda <pnanda@umich.edu> [aut, cre] (<https://orcid.org/0000-0001-9726-4552>)"
+        ## Package initialization.
+        usethis.description = list(
+          "Authors@R" = utils::person(
+            "Pariksheet", "Nanda",
+            email = "pan79@pitt.edu",
+            role = c("aut", "cre"),
+            comment = c(ORCID = "0000-0001-9726-4552")),
+          Language = "en",
+          License = "Apache License (>= 2)"
+        )
     )
     ## macOS packages typically need OpenSSL@1.1 instead of OpenSSL@3. 
     brew <- Sys.getenv("BREW_ROOT", NA)
