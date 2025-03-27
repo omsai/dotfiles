@@ -1,4 +1,3 @@
-
 local({
     options(
         ## Default CRAN mirror.
@@ -29,5 +28,33 @@ local({
         else
             PKG_CONFIG_PATH <- paste0(pc_openssl, ":", PKG_CONFIG_PATH)
         Sys.setenv(PKG_CONFIG_PATH = PKG_CONFIG_PATH)
+    }
+    ## spack r@trunk needs to know where its dependent packages are
+    ## for devtools.
+    ##
+    ## In section 6.3.6 External Software of the R Installation and
+    ## Administration manual, "LD_LIBRARY_PATH is the best choice for
+    ## a user to set."
+    ## https://cran.r-project.org/doc/manuals/r-devel/R-admin.html#External-software
+    if (grepl("opt/spack", R.home())) {
+        spack_install_prefix <-
+            R.home() |>
+            dirname() |>
+            dirname() |>
+            dirname()
+        libdirs <-
+            Sys.glob(
+                file.path(
+                    spack_install_prefix,
+                    c("curl-*",
+                      "libjpeg-*"),
+                    "lib"))
+        if (length(libdirs)) {
+            LD_LIBRARY_PATH <- paste(
+                Sys.getenv("LD_LIBRARY_PATH"),
+                paste(libdirs, collapse = ":"),
+                sep = ":")
+            Sys.setenv(LD_LIBRARY_PATH = LD_LIBRARY_PATH)
+        }
     }
 })
