@@ -161,7 +161,7 @@ See URL `https://emacs.stackexchange.com/a/31009;."
 	  (ess-indent-with-fancy-comments . t))))
 (use-package poly-R
   :config
-  (add-to-list 'auto-mode-alist '("\\.Rmd\\'" . poly-markdown+r-mode)))
+  (add-to-list 'auto-mode-alist '("\\.[qR]md\\'" . poly-markdown+r-mode)))
 (use-package stan-mode
   :config
   (setq indent-tabs-mode nil))
