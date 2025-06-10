@@ -99,6 +99,11 @@ See URL `https://emacs.stackexchange.com/a/31009;."
   (winner-mode)
   :bind ("M-o" . ace-window))
 (use-package unfill)
+(use-package flymake-ansible-lint
+  :ensure t
+  :commands flymake-ansible-lint-setup
+  :hook (((yaml-ts-mode yaml-mode) . flymake-ansible-lint-setup)
+         ((yaml-ts-mode yaml-mode) . flymake-mode)))
 (use-package detached
   :if
   (locate-file "dtach" exec-path)
