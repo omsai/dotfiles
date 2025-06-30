@@ -200,6 +200,15 @@ See URL `https://emacs.stackexchange.com/a/31009;."
 			 (lambda (line) (string-prefix-p "TEXMFDIST" line))
 			 lines)
 			0)))))
+	  nil))
+  ;; Use the Ubuntu 25 default PDF viewer, Papers.
+  (setq TeX-view-program-list
+	(if (locate-file "papers" exec-path)
+	    '(("Papers" "papers --page-index=%(outpage) %o"))
+	  nil))
+  (setq TeX-view-program-selection
+	(if (locate-file "papers" exec-path)
+	    '((output-pdf "Papers"))
 	  nil)))
 ;; Bash unit tests.
 (use-package bats-mode)
