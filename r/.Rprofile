@@ -17,18 +17,6 @@ local({
           License = "Apache License (>= 2)"
         )
     )
-    ## macOS packages typically need OpenSSL@1.1 instead of OpenSSL@3. 
-    brew <- Sys.getenv("BREW_ROOT", NA)
-    if (!is.na(brew)) {
-        PKG_CONFIG_PATH <- Sys.getenv("PKG_CONFIG_PATH")
-        pc_openssl <-
-            Sys.glob(file.path(brew, "Cellar/openssl@1.1/*/lib/pkgconfig"))
-        if (PKG_CONFIG_PATH == "")
-            PKG_CONFIG_PATH <- pc_openssl
-        else
-            PKG_CONFIG_PATH <- paste0(pc_openssl, ":", PKG_CONFIG_PATH)
-        Sys.setenv(PKG_CONFIG_PATH = PKG_CONFIG_PATH)
-    }
     ## spack r@trunk needs to know where its dependent packages are
     ## for devtools.
     ##
