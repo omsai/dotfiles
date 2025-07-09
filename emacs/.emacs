@@ -202,14 +202,12 @@ See URL `https://emacs.stackexchange.com/a/31009;."
 			0)))))
 	  nil))
   ;; Use the Ubuntu 25 default PDF viewer, Papers.
-  (setq TeX-view-program-list
-	(if (locate-file "papers" exec-path)
-	    '(("Papers" "papers --page-index=%(outpage) %o"))
-	  nil))
-  (setq TeX-view-program-selection
-	(if (locate-file "papers" exec-path)
-	    '((output-pdf "Papers"))
-	  nil)))
+  (if (locate-file "papers" exec-path)
+      (progn
+	(setq TeX-view-program-list
+	      '(("Papers" "papers --page-index=%(outpage) %o")))
+	(add-to-list 'TeX-view-program-selection
+		     '((output-pdf "Papers"))))))
 ;; Bash unit tests.
 (use-package bats-mode)
 ;; Org mode hooks.
