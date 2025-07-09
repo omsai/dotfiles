@@ -1,2 +1,3 @@
+ssh/.ssh/authorized_keys
 ssh/.ssh/id_rsa*
-ssh/.ssh/known_hosts
+ssh/.ssh/known_hosts*
