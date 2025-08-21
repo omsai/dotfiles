@@ -209,7 +209,7 @@ See URL `https://emacs.stackexchange.com/a/31009;."
 	(setq TeX-view-program-list
 	      '(("Papers" "papers --page-index=%(outpage) %o")))
 	(add-to-list 'TeX-view-program-selection
-		     '((output-pdf "Papers"))))))
+		     '(output-pdf "Papers")))))
 ;; Bash unit tests.
 (use-package bats-mode)
 ;; Org mode hooks.
