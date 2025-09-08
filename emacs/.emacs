@@ -238,7 +238,8 @@ See URL `https://emacs.stackexchange.com/a/31009;."
 			       '((R . t)
 				 (latex . t)
 				 (shell . t)))
-  (setq org-confirm-babel-evaluate nil))
+  (setq org-confirm-babel-evaluate nil)
+  (plist-put org-format-latex-options :scale 1.5))
 (use-package alert
   :config
   (setq alert-default-style
