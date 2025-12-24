@@ -122,6 +122,47 @@ See URL `https://emacs.stackexchange.com/a/31009;."
   :custom
   (detached-show-output-on-attach t)
   (detached-terminal-data-command system-type))
+(use-package erc
+  :defer t
+  :ensure nil
+  :config
+  ;; Enable SASL to login from VPNs, colorize nicknames, show panels,
+  ;; and log buffers.
+  (setopt erc-modules
+	  (seq-union '(sasl nicks bufbar nickbar log)
+		     erc-modules))
+  :custom
+  ;; Protect me from accidentally sending excess lines.
+  (erc-inhibit-multiline-input t)
+  (erc-send-whitespace-lines t)
+  (erc-ask-about-multiline-input t)
+  ;; Scroll all windows to prompt when submitting input.
+  (erc-scrolltobottom-all t)
+  ;; Reconnect automatically using a fancy strategy.
+  (erc-server-reconnect-function #'erc-server-delayed-check-reconnect)
+  (erc-server-reconnect-timeout 30)
+  ;; Show new buffers in the current window instead of a split.
+  (erc-interactive-display 'buffer)
+  ;; Insert a newline when I hit <RET> at the prompt, and prefer
+  ;; something more deliberate for actually sending messages.
+  :bind (:map erc-mode-map
+              ("RET" . nil)
+              ("C-c C-c" . #'erc-send-current-line))
+  ;; Emphasize buttonized text in notices.
+  :custom-face (erc-notice-face ((t (:slant italic :weight unspecified)))))
+(use-package erc-sasl
+  :defer t
+  :ensure nil
+  ;; Since my account name is the same as my nick, free me from having
+  ;; to hit C-u before M-x erc to trigger a username prompt.
+  :custom (erc-sasl-user :nick))
+(use-package erc-track
+  :defer t
+  :ensure nil
+  ;; Prevent JOINs and PARTs from lighting up the mode-line.
+  :config (setopt erc-track-faces-priority-list
+                  (remq 'erc-notice-face erc-track-faces-priority-list))
+  :custom (erc-track-priority-faces-only 'all))
 ;; Python.
 (use-package elpy
   :config
