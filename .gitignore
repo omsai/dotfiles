@@ -1,3 +1,4 @@
 ssh/.ssh/authorized_keys
+ssh/.ssh/config.local
 ssh/.ssh/id_rsa*
 ssh/.ssh/known_hosts*
