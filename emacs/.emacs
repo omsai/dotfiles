@@ -175,17 +175,23 @@ See URL `https://emacs.stackexchange.com/a/31009;."
      (highlight-indentation-mode -1)
      (add-to-list
       'python-shell-completion-native-disabled-interpreters "jupyter")))
-  (setq
-   ;; Don't use python2, even if it's available.
-   elpy-rpc-python-command "python3"
-   elpy-rpc-virtualenv-path 'current
-   ;; Use jupyter interpreter.
-   python-shell-interpreter "jupyter"
-   python-shell-interpreter-args "console --simple-prompt"
-   python-shell-prompt-detect-failure-warning nil
-   ;; Workaround for
-   ;; https://github.com/jorgenschaefer/elpy/issues/1976
-   elpy-shell-echo-output nil))
+  ;; The jupyter interpreter is typically only available inside virtual
+  ;; environmnets due to python 3.12 advising use of pipx instead of global
+  ;; --user installations.  Therefore, only configure jupyter when it is found
+  ;; in the path.
+  (if (locate-file "jupyter" exec-path)
+      (setq
+       elpy-rpc-virtualenv-path 'current
+       ;; Use jupyter interpreter.
+       python-shell-interpreter "jupyter"
+       python-shell-interpreter-args "console --simple-prompt"
+       python-shell-prompt-detect-failure-warning nil
+       ;; Workaround for
+       ;; https://github.com/jorgenschaefer/elpy/issues/1976
+       elpy-shell-echo-output nil)
+    (setq
+     ;; Don't use python2, even if it's available.
+     elpy-rpc-python-command "python3")))
 ;; R.
 (use-package ess
   :defer t
