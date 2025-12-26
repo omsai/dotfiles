@@ -143,6 +143,8 @@ See URL `https://emacs.stackexchange.com/a/31009;."
   (erc-server-reconnect-timeout 30)
   ;; Show new buffers in the current window instead of a split.
   (erc-interactive-display 'buffer)
+  ;; List of IRC message types to hide.
+  (erc-hide-list '("JOIN" "PART" "QUIT"))
   ;; Insert a newline when I hit <RET> at the prompt, and prefer
   ;; something more deliberate for actually sending messages.
   :bind (:map erc-mode-map
