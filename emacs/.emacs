@@ -129,7 +129,7 @@ See URL `https://emacs.stackexchange.com/a/31009;."
   ;; Enable SASL to login from VPNs, colorize nicknames, show panels,
   ;; and log buffers.
   (setopt erc-modules
-	  (seq-union '(sasl nicks bufbar nickbar log)
+	  (seq-union '(sasl nicks bufbar nickbar log keep-place)
 		     erc-modules))
   :custom
   ;; Protect me from accidentally sending excess lines.
@@ -144,7 +144,7 @@ See URL `https://emacs.stackexchange.com/a/31009;."
   ;; Show new buffers in the current window instead of a split.
   (erc-interactive-display 'buffer)
   ;; List of IRC message types to hide.
-  (erc-hide-list '("JOIN" "PART" "QUIT"))
+  (erc-hide-list '("JOIN" "PART" "QUIT" "MODE" "NICK"))
   ;; Insert a newline when I hit <RET> at the prompt, and prefer
   ;; something more deliberate for actually sending messages.
   :bind (:map erc-mode-map
