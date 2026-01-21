@@ -86,6 +86,9 @@ See URL `https://emacs.stackexchange.com/a/31009;."
     (setq auto-package-update-hide-results t)
     (auto-package-update-maybe)))
 ;; General purpose.
+(use-package exec-path-from-shell
+  :init
+  (exec-path-from-shell-initialize))
 (use-package flycheck
   :config
   (global-flycheck-mode)
