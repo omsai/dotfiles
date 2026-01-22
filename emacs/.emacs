@@ -144,6 +144,9 @@ See URL `https://emacs.stackexchange.com/a/31009;."
   ;; Reconnect automatically using a fancy strategy.
   (erc-server-reconnect-function #'erc-server-delayed-check-reconnect)
   (erc-server-reconnect-timeout 30)
+  ;; Log all channels.
+  (erc-enable-logging t)
+  (erc-save-buffer-on-part t)
   ;; Show new buffers in the current window instead of a split.
   (erc-interactive-display 'buffer)
   ;; List of IRC message types to hide.
