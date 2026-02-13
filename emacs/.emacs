@@ -132,7 +132,7 @@ See URL `https://emacs.stackexchange.com/a/31009;."
   ;; Enable SASL to login from VPNs, colorize nicknames, show panels,
   ;; and log buffers.
   (setopt erc-modules
-	  (seq-union '(sasl nicks bufbar nickbar log keep-place)
+	  (seq-union '(sasl services nicks bufbar nickbar log keep-place)
 		     erc-modules))
   :custom
   ;; Protect me from accidentally sending excess lines.
@@ -163,7 +163,12 @@ See URL `https://emacs.stackexchange.com/a/31009;."
   :ensure nil
   ;; Since my account name is the same as my nick, free me from having
   ;; to hit C-u before M-x erc to trigger a username prompt.
-  :custom (erc-sasl-user :nick))
+  :custom
+  (erc-sasl-user :nick)
+  (erc-use-auth-source-for-nickserv-password t)
+  (erc-sasl-password "irc.libera.chat")
+  (erc-sasl-auth-source-function
+   #'erc-sasl-auth-source-password-as-host))
 (use-package erc-track
   :defer t
   :ensure nil
