@@ -25,6 +25,12 @@ local({
     ## a user to set."
     ## https://cran.r-project.org/doc/manuals/r-devel/R-admin.html#External-software
     if (grepl("opt/spack", R.home())) {
+        ver <- paste(version$major, version$minor, sep = ".")
+        libpath <- file.path(Sys.glob("~/R/x86_64-pc-linux-gnu-library"), ver)
+        if (! dir.exists(libpath)) {
+          dir.create(libpath)
+        }
+        .libPaths(libpath)
         spack_install_prefix <-
             R.home() |>
             dirname() |>
