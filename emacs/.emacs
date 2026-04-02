@@ -227,9 +227,8 @@ See URL `https://emacs.stackexchange.com/a/31009;."
 	  (ess-indent-from-lhs arguments fun-decl-opening)
 	  (ess-indent-from-chain-start . t)
 	  (ess-indent-with-fancy-comments . t))))
-(use-package poly-R
-  :config
-  (add-to-list 'auto-mode-alist '("\\.[qR]md\\'" . poly-markdown+r-mode)))
+(use-package poly-markdown)
+(use-package quarto-mode)
 (use-package stan-mode
   :config
   (setq indent-tabs-mode nil))
@@ -312,14 +311,11 @@ See URL `https://emacs.stackexchange.com/a/31009;."
   :config
   (setq appt-display-duration 725)	; seconds.
   (setq appt-display-interval 1)	; minute.
-  (setq appt-display-format 'window)
-  (defun alert-wrap (mins new-time body)
-    (alert body :title (format "Appointment in %s min(s)" mins)))
-  (setq appt-disp-window-function (function alert-wrap))
   (advice-add 'appt-check
 	      :before
 	      (lambda (&rest args)
 		(org-agenda-to-appt t)))
+  (setq appt-display-format 'echo)
   (appt-activate t))
 (use-package org-agenda
   :ensure nil
