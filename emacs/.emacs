@@ -332,6 +332,7 @@ See URL `https://emacs.stackexchange.com/a/31009;."
 	   "~/Sync/schedule")))
   (setq org-agenda-window-setup "current-window")
   (setq org-agenda-span 14)
+  (setq org-agenda-start-on-weekday 0)
   (setq org-agenda-use-time-grid nil))
 (use-package org-kanban)
 ;; Org-ref.
