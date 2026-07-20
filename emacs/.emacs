@@ -93,7 +93,7 @@ See URL `https://emacs.stackexchange.com/a/31009;."
   :config
   (global-flycheck-mode)
   :init
-  (setq-default flycheck-disabled-checkers '(org-lint))
+  (setq flycheck-disabled-checkers '(org-lint))
   (unless (eq system-type 'darwin)
     (append flycheck-disabled-checkers '(c/c++-clang)))
   (setq flycheck-gcc-openmp t)
