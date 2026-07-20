@@ -41,8 +41,10 @@ local({
                 file.path(
                     spack_install_prefix,
                     c("curl-*",
-                      "libjpeg-*"),
-                    "lib"))
+                      "libjpeg-*",
+                      "imagemagick-*",
+                      "openssl-*"),
+                    "lib*"))
         if (length(libdirs)) {
             LD_LIBRARY_PATH <- paste(
                 Sys.getenv("LD_LIBRARY_PATH"),
