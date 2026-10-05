@@ -21,6 +21,7 @@
     (setq dired-listing-switches "-alhv"))
 (semantic-mode 1)
 (setq sort-fold-case t)
+(put 'narrow-to-region 'disabled nil)
 (defun my-c-mode-common-hook ()
   "Disable extra lambda indentation in 'c-mode' and related modes."
   (c-set-offset 'inlambda 0))
