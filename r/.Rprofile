@@ -26,9 +26,10 @@ local({
     ## https://cran.r-project.org/doc/manuals/r-devel/R-admin.html#External-software
     if (grepl("opt/spack", R.home())) {
         ver <- paste(version$major, version$minor, sep = ".")
-        libpath <- file.path(Sys.glob("~/R/x86_64-pc-linux-gnu-library"), ver)
+        libpath <-
+          file.path(Sys.glob("~"), "R/x86_64-pc-linux-gnu-library", ver)
         if (! dir.exists(libpath)) {
-          dir.create(libpath)
+          dir.create(libpath, recursive = TRUE)
         }
         .libPaths(libpath)
         spack_install_prefix <-
@@ -41,16 +42,30 @@ local({
                 file.path(
                     spack_install_prefix,
                     c("curl-*",
+                      "gettext-*",
                       "libjpeg-*",
                       "imagemagick-*",
                       "openssl-*"),
                     "lib*"))
+        incdirs <-
+          Sys.glob(
+                file.path(
+                    spack_install_prefix,
+                    c("libjpeg-*"),
+                    "include"))
         if (length(libdirs)) {
             LD_LIBRARY_PATH <- paste(
                 Sys.getenv("LD_LIBRARY_PATH"),
                 paste(libdirs, collapse = ":"),
                 sep = ":")
             Sys.setenv(LD_LIBRARY_PATH = LD_LIBRARY_PATH)
+        }
+        if (length(incdirs)) {
+            CPATH <- paste(
+                Sys.getenv("CPATH"),
+                paste(incdirs, collapse = ":"),
+                sep = ":")
+            Sys.setenv(CPATH = CPATH)
         }
     }
 })
